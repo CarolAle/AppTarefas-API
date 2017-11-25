@@ -8,7 +8,8 @@ app.set("json spaces", 4);
 
 //carrega as rotas por meio do modulo consign
 consign()
-.include("routes")
+.include("models")
+.then("libs/middlewares.js")
+.then("routes")
+.then("libs/boot.js")
 .into(app);
-
-app.listen(PORT, () => console.log("app-nodejs = porta ${PORT}"));
