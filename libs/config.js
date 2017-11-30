@@ -8,5 +8,7 @@ module.exports = {
 		define: {
 			underscored: true
 		}
-	}
+	},
+	jwtSecret: "App@2tar",
+	jwtSession: {session: false}
 };
