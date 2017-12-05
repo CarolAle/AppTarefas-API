@@ -1,4 +1,5 @@
 var bcrypt = require('bcrypt');
+
 module.exports = (sequelize, DataType) => {
 	const Users = sequelize.define("Users", {
 		id: {
@@ -7,6 +8,13 @@ module.exports = (sequelize, DataType) => {
 			autoIncrement: true
 		}, 
 		name: {
+			type: DataType.STRING,
+			allowNull: false,
+			validate: {
+				notEmpty: true
+			}
+		},
+		password: {
 			type: DataType.STRING,
 			allowNull: false,
 			validate: {
@@ -25,7 +33,7 @@ module.exports = (sequelize, DataType) => {
 		hooks: {							//funções executaveis antes ou depois de uma operação no banco
 			beforeCreate: user => {			//antes de cadastrar um novo usuario
 				const salt = bcrypt.genSaltSync();  		//bcrypt criptografa a senha do usuario
-				user.password = bcrypt.hasSync(user.password, salt);
+				user.password = bcrypt.hashSync(user.password, salt);
 			}
 		},
 	 
