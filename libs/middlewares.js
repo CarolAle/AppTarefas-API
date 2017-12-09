@@ -2,6 +2,7 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var cors = require('cors');
 var morgan = require('morgan');
+var helmet = require('helmet');
 var logger = require('./logger.js');
 
 module.exports = app => {
@@ -14,6 +15,7 @@ module.exports = app => {
 			}
 		}
 	}));
+	app.use(helmet());
 	app.use(cors({
 		origin: ["http://localhost:3001"],
 		methods: ["GET", "POST", "PUT", "DELETE"],
